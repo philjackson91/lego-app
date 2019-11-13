@@ -68,11 +68,8 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    `mongodb+srv://piquerjr:itsatrap@star-wars-collection-s7j2f.mongodb.net/collection`
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@star-wars-collection-s7j2f.mongodb.net/${process.env.MONGO_DATABASE}`
   )
-  // .connect(
-  //   `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@star-wars-collection-s7j2f.mongodb.net/${process.env.MONGO_DATABASE}`
-  // )
   .then(result => {
     app.listen(process.env.PORT || 8080);
   })

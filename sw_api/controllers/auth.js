@@ -60,8 +60,7 @@ exports.login = (req, res, next) => {
           email: loadedUser.email,
           userId: loadedUser._id.toString()
         },
-        "U7erkYhUEyRyNeaV4uCg7SAkcG3d9zOR9Metf1F3ijwRd9wtOWKYg22lHzvTHxYO0ocjh1"
-        // { expiresIn: "2h" }
+        `${process.env.TOKEN}`
       );
       res.status(200).json({ token: token, userId: loadedUser._id.toString() });
     })
