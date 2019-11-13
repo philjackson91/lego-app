@@ -12,7 +12,6 @@ export default class itemDetailPage extends Component {
   };
 
   render() {
-    console.log(this.state);
     let slideshow = [];
 
     if (this.state.itemType === "set") {
