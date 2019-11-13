@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  font-size: 15px;
+  outline: none;
+}
+
+html {
+  font-family: $sans-serif;
+  background-color: $s3;
+}
+
+body {
+  margin: 0;
+  color: $s1;
+}
+
+main {
+  position: relative;
+  top: 120px;
+  padding: 20px 20px 76px;
+}
+
+a {
+  color: $s1;
+  text-decoration: none;
+}
+
+input {
+  color: $s1;
+}
+
+@mixin x-center {
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+@mixin y-center {
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+@mixin x-y-center {
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}

@@ -1,0 +1,28 @@
+.sets-container {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 10px;
+
+  .set-item_container {
+    text-align: center;
+  }
+
+  .set-item_container h1 {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #e0e0e0;
+  }
+
+  .set-item_image {
+    width: 100%;
+    height: calc(100% - 38px);
+    overflow: hidden;
+    background: #fff;
+    border-radius: 20px;
+    object-fit: contain;
+  }
+}

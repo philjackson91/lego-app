@@ -1,0 +1,183 @@
+// Detail Page
+
+#detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+
+  .back-link {
+    padding: 0;
+  }
+}
+
+#detail-page {
+  top: 56px;
+
+  #detail-top {
+    margin-top: 30px;
+    display: flex;
+    img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    h1 {
+      padding: 0 20px;
+    }
+  }
+
+  #detail-banner-figures {
+    justify-content: unset;
+  }
+  .detail-banner {
+    display: flex;
+    margin: 50px 0 10px 0;
+    width: 100%;
+    justify-content: space-between;
+
+    > div {
+      width: 25%;
+      text-align: center;
+
+      p {
+        margin: 5px 0;
+      }
+    }
+
+    .detail-banner_container {
+      &:not(:last-of-type) {
+        border-right: 1px solid $s1;
+        padding-right: 10px;
+      }
+
+      &:before {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        color: $m1;
+        font-size: 25px;
+      }
+    }
+
+    #set-number {
+      &:before {
+        @include font-icon($icon-hashtag);
+      }
+    }
+    #quality {
+      &:before {
+        @include font-icon($icon-quality);
+      }
+    }
+    #minifig-number {
+      &:before {
+        @include font-icon($icon-minifig);
+      }
+    }
+    #piece-number {
+      &:before {
+        @include font-icon($icon-lego);
+      }
+    }
+  }
+
+  #image-slideshow {
+    display: flex;
+    overflow: hidden;
+    height: 200px;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: scroll;
+
+    figure {
+      margin: 10px;
+
+      img {
+        height: 100%;
+        object-fit: contain;
+        width: auto;
+        max-width: 100%;
+        border-radius: 20px;
+        background: #fff;
+      }
+    }
+  }
+}
+
+// // Detail Page
+
+// #detail-header {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 15px 20px;
+
+//   .back-link {
+//     padding: 0;
+//   }
+// }
+
+// #detail-page {
+//   top: 56px;
+// }
+
+// #detail-top {
+//   margin-top: 30px;
+//   img {
+//     max-width: 100%;
+//     border-radius: 15px;
+//   }
+// }
+
+// #detail-banner {
+//   display: flex;
+//   width: 100%;
+//   justify-content: space-between;
+
+//   > div {
+//     width: 25%;
+//     text-align: center;
+
+//     p {
+//       margin: 5px 0;
+//     }
+//   }
+
+//   .detail-banner_container {
+//     &:not(:last-of-type) {
+//       border-right: 1px solid $s1;
+//       padding-right: 10px;
+//     }
+
+//     &:before {
+//       display: flex;
+//       justify-content: center;
+//       width: 100%;
+//       color: $m1;
+//       font-size: 25px;
+//     }
+//   }
+
+//   #set-number {
+//     &:before {
+//       @include font-icon($icon-hashtag);
+//     }
+//   }
+//   #quality {
+//     &:before {
+//       @include font-icon($icon-quality);
+//     }
+//   }
+//   #minifig-number {
+//     &:before {
+//       @include font-icon($icon-minifig);
+//     }
+//   }
+//   #piece-number {
+//     &:before {
+//       @include font-icon($icon-lego);
+//     }
+//   }
+// }

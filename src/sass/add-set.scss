@@ -1,0 +1,135 @@
+#add-set-page {
+  top: 56px;
+
+  #set-figure-selector {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 20px 0;
+
+    .selected {
+      color: $d1;
+      background: rgba(116, 167, 250, 0.3);
+      &:before {
+        color: $d1 !important;
+      }
+    }
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 30%;
+      margin: 0 auto;
+      padding: 10px;
+      color: $s1;
+      text-transform: uppercase;
+      text-align: center;
+      background: transparent;
+      border: 1px solid rgba(116, 167, 250, 0.3);
+      border-radius: 15px;
+      &:before {
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        width: 100%;
+        color: $s1;
+        font-size: 40px;
+      }
+    }
+
+    #set {
+      &:before {
+        @include font-icon($icon-sets);
+      }
+    }
+
+    #figure {
+      &:before {
+        @include font-icon($icon-minifig);
+      }
+    }
+  }
+}
+
+#add-set {
+  fieldset {
+    margin: 0;
+    padding: 25px 10px;
+    border: 0;
+  }
+
+  #filter-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    column-count: 2;
+    column-gap: 5px;
+  }
+
+  .form-shared-line {
+    display: inline-block;
+    width: calc(50% - 10px);
+
+    &:first-of-type {
+      margin-right: 20px;
+    }
+  }
+
+  label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .section-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .closed-inputs {
+    display: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+  input[type="file"] {
+    display: block;
+  }
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid $s1;
+  }
+
+  textarea {
+    display: block;
+    height: 100px;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    color: $m1;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid $m1;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $d1;
+      background: $m1;
+    }
+  }
+}

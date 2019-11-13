@@ -1,0 +1,13 @@
+#signout-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border: 1px solid $m1;
+  border-radius: 5px;
+  color: $m1;
+  padding: 20px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}

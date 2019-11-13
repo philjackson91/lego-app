@@ -1,0 +1,52 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: $s3;
+  border-top: 1px solid $s1;
+}
+
+#nav-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .selectedLink::before {
+    color: $m1;
+  }
+
+  a {
+    position: relative;
+    height: 45px;
+    width: 45px;
+    font-size: 0;
+    &:before {
+      color: $s1;
+      font-size: 31px;
+      line-height: 45px;
+    }
+  }
+  #sets-link {
+    &:before {
+      @include font-icon($icon-sets);
+    }
+  }
+  #minifig-link {
+    &:before {
+      @include font-icon($icon-minifig);
+    }
+  }
+  #add-set-link {
+    &:before {
+      @include font-icon($icon-plus);
+    }
+  }
+  #signout-link {
+    &:before {
+      @include font-icon($icon-login);
+      position: absolute;
+      transform: rotate(90deg);
+    }
+  }
+}

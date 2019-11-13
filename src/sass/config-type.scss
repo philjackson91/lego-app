@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "IcoMoon";
+  src: url("../fonts/icomoon.eot");
+  src: url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/icomoon.woff") format("woff"),
+    url("../fonts/icomoon.ttf") format("truetype"),
+    url("../fonts/icomoon.svg") format("svg");
+}
+
+$sans-serif: "Roboto", sans-serif;
+
+$font-icon: "IcoMoon";
+
+$icon-death-star: "\e90a";
+$icon-jedi-order: "\e90b";
+$icon-hashtag: "\e90c";
+$icon-lego: "\e90d";
+$icon-quality: "\e90e";
+
+$icon-back: "\e900";
+$icon-minifig: "\e901";
+$icon-plus: "\e902";
+$icon-search: "\e903";
+$icon-login: "\e904";
+$icon-sets: "\e905";
+$icon-clock: "\e906";
+$icon-close: "\e907";
+$icon-padlock: "\e908";
+$icon-profile: "\e909";
+
+@mixin font-icon($icon) {
+  content: $icon;
+  font-family: $font-icon;
+  speak: none;
+}
