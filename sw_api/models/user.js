@@ -15,6 +15,18 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "PreviousSearches"
     }
+  ],
+  sets: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Sets"
+    }
+  ],
+  minifigures: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Minifigures"
+    }
   ]
 });
 

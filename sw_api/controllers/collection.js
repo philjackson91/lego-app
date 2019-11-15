@@ -6,7 +6,7 @@ const Searches = require("../models/searches");
 const User = require("../models/user");
 
 exports.getSets = (req, res, next) => {
-  Sets.find()
+  Sets.find({ creator: req.userId })
     .then(sets => {
       res.status(200).json({
         message: "Fetched sets successfully.",
@@ -23,12 +23,13 @@ exports.getSets = (req, res, next) => {
 
 exports.addSet = (req, res, next) => {
   const errors = validationResult(req);
+  console.log("user", req.userId);
   if (!errors.isEmpty()) {
     const error = new Error("Validation failed, entered data is incorrect.");
     error.statusCode = 422;
     throw error;
   }
-
+  let creator;
   const name = req.body.name;
   const images = req.body.images;
   const SetNumber = req.body.setNumber;
@@ -41,6 +42,7 @@ exports.addSet = (req, res, next) => {
   const year = req.body.year;
   images;
   const set = new Sets({
+    creator: req.userId,
     name: name,
     images: images,
     SetNumber: SetNumber,
@@ -55,9 +57,18 @@ exports.addSet = (req, res, next) => {
   set
     .save()
     .then(result => {
+      return User.findById(req.userId);
+    })
+    .then(user => {
+      creator = user;
+      user.sets.push(set);
+      return user.save();
+    })
+    .then(result => {
       res.status(201).json({
-        message: "Set Added successfully!",
-        set: result
+        message: "Set added successfully!",
+        set: set,
+        creator: { _id: creator._id, name: creator.name }
       });
     })
     .catch(err => {
@@ -69,7 +80,7 @@ exports.addSet = (req, res, next) => {
 };
 
 exports.getFigures = (req, res, next) => {
-  Figures.find()
+  Figures.find({ creator: req.userId })
     .then(figures => {
       res.status(200).json({
         message: "Fetched figures successfully.",
@@ -91,7 +102,7 @@ exports.addFigure = (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
-
+  let creator;
   const name = req.body.name;
   const images = req.body.images;
   const SetNumber = req.body.setNumber;
@@ -102,6 +113,7 @@ exports.addFigure = (req, res, next) => {
   const included = req.body.included;
   const year = req.body.year;
   const fig = new Figures({
+    creator: req.userId,
     name: name,
     images: images,
     SetNumber: SetNumber,
@@ -115,9 +127,18 @@ exports.addFigure = (req, res, next) => {
   fig
     .save()
     .then(result => {
+      return User.findById(req.userId);
+    })
+    .then(user => {
+      creator = user;
+      user.minifigures.push(fig);
+      return user.save();
+    })
+    .then(result => {
       res.status(201).json({
-        message: "fig Added successfully!",
-        fig: result
+        message: "Figure added successfully!",
+        figure: fig,
+        creator: { _id: creator._id, name: creator.name }
       });
     })
     .catch(err => {
@@ -129,7 +150,6 @@ exports.addFigure = (req, res, next) => {
 };
 
 exports.editSet = (req, res, next) => {
-  console.log(req.body);
   if (req.body.itemType === "set") {
     const name = req.body.name;
     const images = req.body.images;
@@ -142,7 +162,7 @@ exports.editSet = (req, res, next) => {
     const included = req.body.included;
     const year = req.body.year;
 
-    Sets.findOne({ SetNumber: SetNumber })
+    Sets.findById(req.body.itemId)
       .then(set => {
         if (!set) {
           const error = new Error(`A set with that ID could not be found.`);
@@ -181,7 +201,7 @@ exports.editSet = (req, res, next) => {
     const included = req.body.included;
     const year = req.body.year;
 
-    Figures.findOne({ SetNumber: req.body.SetNumber })
+    Figures.findById(req.body.itemId)
       .then(figure => {
         if (!figure) {
           const error = new Error("A figure with this ID could not be found.");
@@ -211,12 +231,69 @@ exports.editSet = (req, res, next) => {
   }
 };
 
+exports.deleteSet = (req, res, next) => {
+  const setId = req.body.item._id;
+
+  Sets.findById(setId)
+    .then(set => {
+      if (!set) {
+        const error = new Error("Could not find set.");
+        error.statusCode = 404;
+        throw error;
+      }
+      if (set.creator.toString() !== req.userId) {
+        const error = new Error("Not authorized!");
+        error.statusCode = 403;
+        throw error;
+      }
+      return Sets.findByIdAndRemove(setId);
+    })
+    .then(result => {
+      return User.findById(req.userId);
+    })
+    .then(user => {
+      user.sets.pull(setId);
+      return user.save();
+    })
+    .then(result => {
+      res.status(200).json({ message: "Deleted post." });
+    });
+};
+
+exports.deleteFigure = (req, res, next) => {
+  const setId = req.body.item._id;
+  Figures.findById(setId)
+    .then(figure => {
+      if (!figure) {
+        const error = new Error("Could not find figure.");
+        error.statusCode = 404;
+        throw error;
+      }
+      if (figure.creator.toString() !== req.userId) {
+        const error = new Error("Not authorized!");
+        error.statusCode = 403;
+        throw error;
+      }
+      return Figures.findByIdAndRemove(setId);
+    })
+    .then(result => {
+      return User.findById(req.userId);
+    })
+    .then(user => {
+      user.minifigures.pull(setId);
+      return user.save();
+    })
+    .then(result => {
+      res.status(200).json({ message: "Deleted post." });
+    });
+};
+
 exports.getPreviousSearch = (req, res, next) => {
   Searches.find({ creator: req.userId })
-    .then(user => {
+    .then(searches => {
       res.status(200).json({
         message: "Fetch successfully.",
-        searches: user
+        searches: searches
       });
     })
     .catch(err => {
