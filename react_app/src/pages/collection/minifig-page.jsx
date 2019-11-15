@@ -8,14 +8,11 @@ export default class minifigPage extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(
-        "https://lego-star-wars-tracker.herokuapp.com/collection/minifigs",
-        {
-          headers: {
-            Authorization: "Bearer " + this.props.token
-          }
+      fetch("https://lego-star-wars-tracker.herokuapp.com/collection/minifigs", {
+        headers: {
+          Authorization: "Bearer " + this.props.token
         }
-      ).then(value => value.json()),
+      }).then(value => value.json()),
       fetch("https://lego-star-wars-tracker.herokuapp.com/collection/sets", {
         headers: {
           Authorization: "Bearer " + this.props.token
@@ -32,7 +29,7 @@ export default class minifigPage extends Component {
         console.log(err);
       });
 
-    // fetch("http://localhost:8080/collection/minifigs", {
+    // fetch("https://lego-star-wars-tracker.herokuapp.com/collection/minifigs", {
     //   headers: {
     //     Authorization: "Bearer " + this.props.token
     //   }

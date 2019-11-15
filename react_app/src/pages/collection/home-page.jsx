@@ -8,14 +8,11 @@ export default class homePage extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(
-        "https://lego-star-wars-tracker.herokuapp.com/collection/minifigs",
-        {
-          headers: {
-            Authorization: "Bearer " + this.props.token
-          }
+      fetch("https://lego-star-wars-tracker.herokuapp.com/collection/minifigs", {
+        headers: {
+          Authorization: "Bearer " + this.props.token
         }
-      ).then(value => value.json()),
+      }).then(value => value.json()),
       fetch("https://lego-star-wars-tracker.herokuapp.com/collection/sets", {
         headers: {
           Authorization: "Bearer " + this.props.token

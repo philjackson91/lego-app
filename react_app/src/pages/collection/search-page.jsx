@@ -11,14 +11,11 @@ export default class searchPage extends Component {
   componentDidMount() {
     if (this.state.searchtype === "/") {
       Promise.all([
-        fetch(
-          "https://lego-star-wars-tracker.herokuapp.com/collection/previousSearches",
-          {
-            headers: {
-              Authorization: "Bearer " + this.props.location.state.token
-            }
+        fetch("https://lego-star-wars-tracker.herokuapp.com/collection/previousSearches", {
+          headers: {
+            Authorization: "Bearer " + this.props.location.state.token
           }
-        ).then(value => value.json()),
+        }).then(value => value.json()),
         fetch("https://lego-star-wars-tracker.herokuapp.com/collection/sets", {
           headers: {
             Authorization: "Bearer " + this.props.location.state.token
@@ -52,22 +49,16 @@ export default class searchPage extends Component {
         });
     } else {
       Promise.all([
-        fetch(
-          "https://lego-star-wars-tracker.herokuapp.com/collection/previousSearches",
-          {
-            headers: {
-              Authorization: "Bearer " + this.props.location.state.token
-            }
+        fetch("https://lego-star-wars-tracker.herokuapp.com/collection/previousSearches", {
+          headers: {
+            Authorization: "Bearer " + this.props.location.state.token
           }
-        ).then(value => value.json()),
-        fetch(
-          "https://lego-star-wars-tracker.herokuapp.com/collection/minifigs",
-          {
-            headers: {
-              Authorization: "Bearer " + this.props.location.state.token
-            }
+        }).then(value => value.json()),
+        fetch("https://lego-star-wars-tracker.herokuapp.com/collection/minifigs", {
+          headers: {
+            Authorization: "Bearer " + this.props.location.state.token
           }
-        ).then(value => value.json())
+        }).then(value => value.json())
       ])
         .then(allResponses => {
           let searches = [];
@@ -102,7 +93,7 @@ export default class searchPage extends Component {
 
     // if (this.state.query !== "") {
 
-    //   fetch("http://localhost:8080/collection/addNewSearchQuery", {
+    //   fetch("https://lego-star-wars-tracker.herokuapp.com/collection/addNewSearchQuery", {
     //     method: "POST",
     //     headers: {
     //       "Content-Type": "application/json",

@@ -1,14 +1,54 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import firebase from "../../config/firebase";
 
 import BackLink from "../../components/back-link";
 
-export default class itemDetailPage extends Component {
+class itemDetailPage extends Component {
   state = {
     item: this.props.location.state.item,
     itemType: this.props.location.state.itemType,
     sets: this.props.location.state.sets,
-    figures: this.props.location.state.figures
+    figures: this.props.location.state.figures,
+    showDeletePopup: false
+  };
+
+  deleteToggle = () => {
+    this.setState(prevState => {
+      return { showDeletePopup: !prevState.showDeletePopup };
+    });
+  };
+
+  deleteItem = () => {
+    let url =
+      this.state.itemType === "set"
+        ? "https://lego-star-wars-tracker.herokuapp.com/collection/delete-set"
+        : "https://lego-star-wars-tracker.herokuapp.com/collection/delete-figure";
+
+    firebase
+      .storage()
+      .refFromURL(this.state.item.images)
+      .delete()
+      .then()
+      .catch(err => {
+        console.log("error deleting previous image: ", err);
+      });
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.props.location.state.token
+      },
+      body: JSON.stringify({
+        item: this.state.item
+      })
+    })
+      .then(i => {
+        this.props.history.goBack();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -117,20 +157,46 @@ export default class itemDetailPage extends Component {
             </ul>
           </section>
 
-          <Link
-            to={{
-              pathname: "/edit",
-              state: {
-                ...this.state,
-                token: localStorage.getItem("token"),
-                userId: localStorage.getItem("userId")
-              }
-            }}
+          <div id="item-config">
+            <Link
+              to={{
+                pathname: "/edit",
+                state: {
+                  ...this.state,
+                  token: localStorage.getItem("token"),
+                  userId: localStorage.getItem("userId")
+                }
+              }}
+            >
+              Edit
+            </Link>
+            <button onClick={this.deleteToggle}>Delete</button>
+          </div>
+          <div
+            className={
+              this.state.showDeletePopup ? "popup-container" : "disabled-popup"
+            }
           >
-            Edit
-          </Link>
+            <div className="backdrop"></div>
+            <div className="popup-content_container">
+              <h1>
+                Are you sure youd like to delete this{" "}
+                {this.state.itemType === "set" ? "set" : "figure"}?
+              </h1>
+              <div className="popup-content_button-container">
+                <button id="popup-content_delete" onClick={this.deleteItem}>
+                  Yes
+                </button>
+                <button onClick={this.deleteToggle} id="popup-content_back">
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
         </main>
       </React.Fragment>
     );
   }
 }
+
+export default withRouter(itemDetailPage);

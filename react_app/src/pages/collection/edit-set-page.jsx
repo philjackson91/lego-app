@@ -152,7 +152,7 @@ export default class addSetPage extends Component {
                 filters.forEach(filter => {
                   formData.append("filters", filter);
                 });
-
+                formData.append("itemId", this.state.originalSetDetails._id);
                 formData.append("SetNumber", this.state.setNumber);
                 formData.append("pieceNumber", this.state.pieceNumber);
                 formData.append("minifigNumber", this.state.minifigNumber);
@@ -203,7 +203,7 @@ export default class addSetPage extends Component {
         filters.forEach(filter => {
           formData.append("filters", filter);
         });
-
+        formData.append("itemId", this.state.originalSetDetails._id);
         formData.append("SetNumber", this.state.setNumber);
         formData.append("pieceNumber", this.state.pieceNumber);
         formData.append("minifigNumber", this.state.minifigNumber);
@@ -237,20 +237,6 @@ export default class addSetPage extends Component {
     } else {
       return;
     }
-
-    // let state = this.props.location.state;
-
-    // const formData = new FormData();
-    // // formData.append("image", this.state.images);
-    // formData.append("SetNumber", state.item.SetNumber);
-    // formData.append("itemType", state.itemType);
-    // fetch("http://localhost:8080/collection/edit", {
-    //   method: "POST",
-    //   body: formData,
-    //   headers: {
-    //     Authorization: "Bearer " + this.props.location.state.token
-    //   }
-    // });
   };
 
   updateFigure = e => {
@@ -315,6 +301,7 @@ export default class addSetPage extends Component {
                 filters.forEach(filter => {
                   formData.append("filters", filter);
                 });
+                formData.append("itemId", this.state.originalSetDetails._id);
                 formData.append("appearsIn", this.state.appearsIn);
                 formData.append("figureId", this.state.figureId);
                 formData.append("SetNumber", this.state.setNumber);
@@ -366,6 +353,7 @@ export default class addSetPage extends Component {
         filters.forEach(filter => {
           formData.append("filters", filter);
         });
+        formData.append("itemId", this.state.originalSetDetails._id);
         formData.append("appearsIn", this.state.appearsIn);
         formData.append("figureId", this.state.figureId);
         formData.append("SetNumber", this.state.setNumber);
@@ -403,6 +391,8 @@ export default class addSetPage extends Component {
   };
 
   render() {
+    console.log(this.state.originalSetDetails._id);
+
     if (this.state.redirectToHome) {
       return <Redirect to="/" />;
     }

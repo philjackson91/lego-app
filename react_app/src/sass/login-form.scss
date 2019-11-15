@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 70%;
-  height: 200px;
+  height: 240px;
 
   #logo {
     position: relative;
@@ -32,7 +32,7 @@
   .form-contents {
     display: flex;
     flex-direction: column;
-    height: 100px;
+    height: 140px;
     justify-content: space-between;
 
     input {
@@ -41,15 +41,34 @@
       border-bottom: 1px solid $s1;
     }
 
-    button {
-      background-color: transparent;
-      color: $s1;
-      border: 0;
-      border-radius: 2px;
-      box-shadow: -1px -1px 1px 1px $m1;
-      font-size: 0.9em;
-      height: 30px;
-      padding-left: 5px;
+    #form-contents_button-login {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 10px;
+      color: $m1;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid $m1;
+      border-radius: 5px;
+      transition: 0.5s;
+      cursor: pointer;
+    }
+
+    button#form-contents_button-signin {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 10px;
+      color: $s3;
+      text-transform: uppercase;
+      background: $m1;
+      border: 1px solid $m1;
+      border-radius: 5px;
+      transition: 0.5s;
+      cursor: pointer;
     }
   }
 }

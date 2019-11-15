@@ -4,17 +4,28 @@ import { Link } from "react-router-dom";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    logInSignUp: "login"
   };
 
   inputChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  authMethodHandler = e => {
+    e.preventDefault();
+    if (e.target.name === "login") {
+      this.props.onLogin(e, this.state);
+    }
+    if (e.target.name === "signup") {
+      this.props.onSignup(e, this.state);
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
-        <form id="login-form" onSubmit={e => this.props.onLogin(e, this.state)}>
+        <form id="login-form">
           <div id="logo"></div>
           <div className="form-contents">
             <input
@@ -33,7 +44,22 @@ class Login extends Component {
               onChange={this.inputChangeHandler}
               placeholder="password"
             />
-            <button type="submit">Login</button>
+            <button
+              id="form-contents_button-login"
+              name="login"
+              onClick={this.authMethodHandler}
+              type="submit"
+            >
+              Login
+            </button>
+            <button
+              id="form-contents_button-signin"
+              name="signup"
+              onClick={this.authMethodHandler}
+              type="submit"
+            >
+              SignUp
+            </button>
           </div>
         </form>
         {/* <Link to="/signup">Create an Account</Link> */}

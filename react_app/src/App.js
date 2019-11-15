@@ -8,7 +8,6 @@ import SearchToggle from "./components/large-serach-toggle";
 
 // pages
 import LoginPage from "./pages/Auth/Login";
-import SignupPage from "./pages/Auth/Signup";
 import SignOutPage from "./pages/Auth/SignOut";
 
 import HomePage from "./pages/collection/home-page";
@@ -38,7 +37,6 @@ class App extends Component {
     }
 
     const userId = localStorage.getItem("userId");
-
     this.setState({ isAuth: true, token: token, userId: userId });
   }
 
@@ -67,7 +65,7 @@ class App extends Component {
     event.preventDefault();
     this.setState({ authLoading: true });
     // https://lego-star-wars-tracker.herokuapp.com/auth/signup
-    fetch("http://localhost:8080/auth/signup", {
+    fetch("https://lego-star-wars-tracker.herokuapp.com/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -91,6 +89,7 @@ class App extends Component {
       })
       .then(resData => {
         this.setState({ isAuth: false, authLoading: false });
+        this.loginHandler(event, authData);
       })
       .catch(err => {
         console.log(err);
@@ -174,21 +173,12 @@ class App extends Component {
             <LoginPage
               {...props}
               onLogin={this.loginHandler}
-              loading={this.state.authLoading}
-            />
-          )}
-        />
-        <Route
-          path="/signup"
-          exact
-          render={props => (
-            <SignupPage
-              {...props}
               onSignup={this.signupHandler}
               loading={this.state.authLoading}
             />
           )}
         />
+        )} />
         <Redirect to="/" />
       </Switch>
     );

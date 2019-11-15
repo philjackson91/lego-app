@@ -346,7 +346,9 @@ export default class addSetPage extends Component {
               />
             </fieldset>
             <fieldset className="form-item">
-              <figure id="prevImage">
+              <figure
+                id={!this.state.imagePreview ? "prevImage-close" : "prevImage"}
+              >
                 <img
                   src={this.state.imagePreview ? this.state.imagePreview : null}
                   alt=""
